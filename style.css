@@ -671,11 +671,31 @@ input:focus, select:focus, textarea:focus {
     opacity: 0;
     transform: translateY(30px);
     transition: 0.8s ease-out;
+    /* Fallback: if browser doesn't support IntersectionObserver or JS fails, 
+       elements will still fade in eventually after a delay */
+    animation: fadeInFallback 1s forwards;
+    animation-delay: 2s; /* Give JS time to work first */
 }
 
 .slide-up.visible {
     opacity: 1;
     transform: translateY(0);
+    animation: none; /* Disable fallback if JS successfully triggers visibility */
+}
+
+@keyframes fadeInFallback {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .slide-up {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
 }
 
 @keyframes fadeIn {
