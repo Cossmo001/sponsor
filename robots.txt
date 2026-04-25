@@ -1,0 +1,6 @@
+# Robots.txt for Cosmo Intent Lab Sponsorship Portal
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://thewhocares.app/sitemap.xml
