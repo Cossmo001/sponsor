@@ -18,8 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.textContent = 'Processing request...';
             submitBtn.disabled = true;
 
+            const fullName = document.getElementById('fullName').value;
             const companyName = document.getElementById('companyName').value;
-            const email = document.getElementById('email').value;
+            const companyEmail = document.getElementById('companyEmail').value;
+            const personalEmail = document.getElementById('personalEmail').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
             const tier = document.getElementById('tierSelection').value;
             const message = document.getElementById('message').value;
             const logoFile = document.getElementById('logoUpload').files[0];
@@ -51,8 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 .from('sponsors')
                 .insert([
                     {
+                        full_name: fullName,
                         company_name: companyName,
-                        email: email,
+                        company_email: companyEmail,
+                        personal_email: personalEmail,
+                        phone_number: phoneNumber,
                         tier: tier,
                         notes: message,
                         status: 'pending',
@@ -73,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const handler = PaystackPop.setup({
                 key: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
-                email: email,
+                email: personalEmail,
                 amount: amountInKobo,
                 currency: 'NGN',
                 ref: 'TS_' + Math.floor((Math.random() * 1000000000) + 1),
